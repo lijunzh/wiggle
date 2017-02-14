@@ -29,6 +29,7 @@ install:
   - conda create -q -n test-environment python=$TRAVIS_PYTHON_VERSION
   - source activate test-environment
   - conda install numpy matplotlib pytest
+  - pip install ricker
   - python setup.py install
 
   # Test the building of your recipe in conda build
