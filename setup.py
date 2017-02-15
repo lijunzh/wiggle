@@ -62,6 +62,11 @@ def setup_package():
         build_requires = (['numpy>=1.8.2'] if 'bdist_wheel' in sys.argv[1:]
                           else [])
 
+    try:
+        import matplotlib
+    except ImportError:
+        build_requires += ['matplotlib>=2.0.0']
+
     metadata = dict(
         name='wiggle',
         maintainer="Lijun Zhu",
