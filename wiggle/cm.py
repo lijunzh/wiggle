@@ -3,7 +3,7 @@ import numpy as np
 from matplotlib.colors import LinearSegmentedColormap
 
 
-def bwr(alpha=0):
+def bwr(alpha: float = 0) -> LinearSegmentedColormap:
     """
     Create a Blue-White-Red colormap given transparency value (alpha,
     default=0 for seismic cmap) in the middle.
