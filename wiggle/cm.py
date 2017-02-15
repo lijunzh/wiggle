@@ -1,15 +1,23 @@
+from numbers import Number
+
 import matplotlib.pyplot as plt
 import numpy as np
+import typecheck as tc
 from matplotlib.colors import LinearSegmentedColormap
 
 
-def bwr(alpha: float = 0) -> LinearSegmentedColormap:
+def is_zero_to_one(f): return (isinstance(f, Number)) and (0. <= f <= 1.)
+
+
+@tc.typecheck
+def bwr(alpha: is_zero_to_one = 0) -> LinearSegmentedColormap:
     """
     Create a Blue-White-Red colormap given transparency value (alpha,
     default=0 for seismic cmap) in the middle.
 
     :param alpha: Transparency value in the middle between 0 and 1 (default=0).
     :type alpha: float
+
     :return: Blue-White-Red colormap
     :rtype: matplotlib.colors.LinearSegmentedColormap object
     """
@@ -52,6 +60,6 @@ if __name__ == '__main__':
     gradient = np.vstack((gradient, gradient))
 
     fig, ax = plt.subplots()
-    ax.imshow(gradient, interpolation='none', aspect='auto', cmap=bwr())
+    ax.imshow(gradient, interpolation='none', aspect='auto', cmap=bwr(-1))
     ax.set_axis_off()
     plt.show()
