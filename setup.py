@@ -1,9 +1,7 @@
 #!/usr/bin/env python
-"""Ricker Wavelet Generator for Seismic Simulation
+"""Wiggle Plot for Seismic Data Section
 
-This is a Ricker wavelet generator for a shifted Ricker wavelet signal
-seismic simulation. It depends on the NumPy package which gives a nice
-matrix/array structure to represent data.
+Visualize seismic data section using wiggle plots.
 """
 
 DOCLINES = __doc__.split("\n")
@@ -13,10 +11,8 @@ import sys
 from setuptools import setup, find_packages
 
 # Check Python version
-# if sys.version_info[:2] < (2, 6) or (3, 0) <= sys.version_info[0:2] < (3, 2):
-#     raise RuntimeError("Python version 2.6, 2.7 or >= 3.2 required.")
-if sys.version_info < (3, 4):
-    raise RuntimeError("Python version >= 3.4 required.")
+if sys.version_info[:2] < (2, 7) or (3, 0) <= sys.version_info[0:2] < (3, 4):
+    raise RuntimeError("Python version 2.7 or >= 3.4 required.")
 
 CLASSIFIERS = """\
 Development Status :: 2 - Pre-Alpha
@@ -24,6 +20,8 @@ Intended Audience :: Science/Research
 Intended Audience :: Developers
 License :: OSI Approved :: MIT License
 Programming Language :: Python
+Programming Language :: Python :: 2
+Programming Language :: Python :: 2.7
 Programming Language :: Python :: 3
 Programming Language :: Python :: 3.4
 Programming Language :: Python :: 3.5
