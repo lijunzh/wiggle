@@ -44,7 +44,7 @@ def wiggle_input_check(data, tt, xx, ax, sf, verbose):
     if not isinstance(verbose, bool):
         raise TypeError("verbose must be a bool")
 
-    if not isinstance(ax, (matplotlib.axes._axes.Axes)):
+    if ax and not isinstance(ax, (matplotlib.axes._axes.Axes)):
         raise TypeError("ax (axes) must be a matplotlib axes")
 
     # Input check for data
