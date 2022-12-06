@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
 
 
@@ -34,7 +35,7 @@ def insert_zeros(trace, tt=None):
     return trace_zi, tt_zi
 
 
-def wiggle_input_check(data, tt, xx, sf, verbose):
+def wiggle_input_check(data, tt, xx, ax, sf, verbose):
     ''' Helper function for wiggle() and traces() to check input
 
     '''
@@ -42,6 +43,9 @@ def wiggle_input_check(data, tt, xx, sf, verbose):
     # Input check for verbose
     if not isinstance(verbose, bool):
         raise TypeError("verbose must be a bool")
+
+    if ax and not isinstance(ax, (matplotlib.axes._axes.Axes)):
+        raise TypeError("ax (axes) must be a matplotlib axes")
 
     # Input check for data
     if type(data).__module__ != np.__name__:
@@ -94,15 +98,16 @@ def wiggle_input_check(data, tt, xx, sf, verbose):
     return data, tt, xx, ts
 
 
-def wiggle(data, tt=None, xx=None, color='k', sf=0.15, verbose=False):
+def wiggle(data, tt=None, xx=None, ax=None, color='k', sf=0.15, verbose=False):
     '''Wiggle plot of a sesimic data section
 
     Syntax examples:
         wiggle(data)
         wiggle(data, tt)
         wiggle(data, tt, xx)
-        wiggle(data, tt, xx, color)
-        fi = wiggle(data, tt, xx, color, sf, verbose)
+        wiggle(data, tt, xx, ax)
+        wiggle(data, tt, xx, ax, color)
+        fi = wiggle(data, tt, xx, ax, color, sf, verbose)
 
     Use the column major order for array as in Fortran to optimal performance.
 
@@ -125,12 +130,13 @@ def wiggle(data, tt=None, xx=None, color='k', sf=0.15, verbose=False):
     '''
 
     # Input check
-    data, tt, xx, ts = wiggle_input_check(data, tt, xx, sf, verbose)
+    data, tt, xx, ts = wiggle_input_check(data, tt, xx, ax, sf, verbose)
 
     # Plot data using matplotlib.pyplot
     Ntr = data.shape[1]
 
-    ax = plt.gca()
+    if ax is None:
+        ax = plt.gca()
     for ntr in range(Ntr):
         trace = data[:, ntr]
         offset = xx[ntr]
@@ -147,6 +153,7 @@ def wiggle(data, tt=None, xx=None, color='k', sf=0.15, verbose=False):
     ax.set_xlim(xx[0] - ts, xx[-1] + ts)
     ax.set_ylim(tt[0], tt[-1])
     ax.invert_yaxis()
+    return ax
 
 
 if __name__ == '__main__':
