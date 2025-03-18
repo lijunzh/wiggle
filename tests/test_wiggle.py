@@ -41,7 +41,7 @@ class TestWiggle:
         xlims = ax.get_xlim()
         ylims = ax.get_ylim()
         assert xlims[0] < xlims[1]
-        assert ylims[0] < ylims[1]
+        assert ylims[0] > ylims[1]
 
     def test_wiggle_with_custom_ax(self):
         # Test using a provided matplotlib axis
