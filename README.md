@@ -1,6 +1,6 @@
 # Wiggle Plot for Seismic Data Section
 
-[![Build Status](https://travis-ci.org/gatechzhu/wiggle.svg?branch=master)](https://travis-ci.org/gatechzhu/wiggle)
+[![CI](https://github.com/gatechzhu/wiggle/actions/workflows/ci.yml/badge.svg)](https://github.com/gatechzhu/wiggle/actions/workflows/ci.yml)
 
 ## Introduction
 The [wiggle](http://wiki.aapg.org/Seismic_data_display) display is an ingenious methodology that displays two dimensional scalar fields on a horizontal plane. 
@@ -32,7 +32,7 @@ pip install wiggle
 ```
 
 ### From source file
-Download srouce file from [releases page](https://github.com/gatechzhu/wiggle/releases). Under the root directory, type:
+Download source file from [releases page](https://github.com/gatechzhu/wiggle/releases). Under the root directory, run:
 
 ```
 python setup.py install
