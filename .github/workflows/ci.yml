@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [2.7, 3.4, 3.5, 3.6]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Miniconda and create environment
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          python-version: ${{ matrix.python-version }}
+          activate-environment: test-environment
+
+      - name: Configure conda
+        run: conda config --set always_yes yes --set changeps1 no
+
+      - name: Show conda info
+        run: conda info -a
+
+      - name: Install dependencies
+        run: conda install numpy matplotlib pytest
+
+      - name: Install package
+        run: python setup.py install
+
+      - name: Run tests
+        run: pytest
