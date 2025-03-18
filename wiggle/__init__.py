@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import division, print_function, absolute_import
+__all__ = ["wiggle"]
 
 from .wiggle import wiggle
