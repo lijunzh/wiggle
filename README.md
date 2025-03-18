@@ -1,6 +1,6 @@
 # Wiggle Plot for Seismic Data Section
 
-[![CI](https://github.com/gatechzhu/wiggle/actions/workflows/ci.yml/badge.svg)](https://github.com/gatechzhu/wiggle/actions/workflows/ci.yml)
+[![Python Package](https://github.com/gatechzhu/wiggle/actions/workflows/python-package.yml/badge.svg)](https://github.com/gatechzhu/wiggle/actions/workflows/python-package.yml)
 
 ## Introduction
 The [wiggle](http://wiki.aapg.org/Seismic_data_display) display is an ingenious methodology that displays two dimensional scalar fields on a horizontal plane. 
