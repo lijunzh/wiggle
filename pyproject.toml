@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wiggle"
+version = "0.1.0"
+description = "Wiggle Plot for Seismic Data Section"
+readme = "README.md"
+authors = [
+    { name = "gatechzhu", email = "gatechzhu@gmail.com" }
+]
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "matplotlib"
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+]

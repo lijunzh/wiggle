@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pytest
 
-from wiggle.wiggle import wiggle
+from wiggle import wiggle
 
 class TestWiggle:
     def test_input_check_invalid_data(self):
