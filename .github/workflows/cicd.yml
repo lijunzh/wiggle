@@ -1,13 +1,17 @@
-name: CI via pytest
+name: CI/CD
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
+    tags:
+      - 'v*'
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - master
 
 jobs:
-  uv:
+  tests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -35,3 +39,20 @@ jobs:
 
       - name: Run tests
         run: uv run pytest tests
+
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: tests
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: "uv.lock"
+
+      - name: Publish to PyPI test
+        run: uv publish --index testpypi
