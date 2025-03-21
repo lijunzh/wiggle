@@ -5,7 +5,7 @@ on:
     branches:
       - master
     tags:
-      - 'v*'
+      - "v*.*.*"
   pull_request:
     branches:
       - master
@@ -50,7 +50,10 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Ensure full Git history for setuptools_scm to read tags
 
       - name: Setup uv
         uses: astral-sh/setup-uv@v5
