@@ -32,10 +32,16 @@ pip install wiggle
 ```
 
 ### From source file
-Download source file from [releases page](https://github.com/gatechzhu/wiggle/releases). Under the root directory, run:
+Download the source from the [releases page](https://github.com/gatechzhu/wiggle/releases). Under the root directory, run:
 
 ```
-python setup.py install
+uv sync --all-extras --dev
+```
+
+to install the project in development mode, or build a source distribution using:
+
+```
+uv build
 ```
 
 ## Contact
