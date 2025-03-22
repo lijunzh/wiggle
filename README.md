@@ -1,6 +1,9 @@
 # Wiggle Plot for Seismic Data Section
 
-[![Python Package](https://github.com/gatechzhu/wiggle/actions/workflows/python-package.yml/badge.svg)](https://github.com/gatechzhu/wiggle/actions/workflows/python-package.yml)
+[![PyPI version](https://img.shields.io/pypi/v/wiggle)](https://pypi.org/project/wiggle/)
+![License](https://img.shields.io/pypi/l/wiggle)
+![Python versions](https://img.shields.io/pypi/pyversions/wiggle)
+[![Build Status](https://github.com/gatechzhu/wiggle/actions/workflows/cicd.yml/badge.svg)](https://github.com/lijunzh/wiggle/actions/workflows/cicd.yml)
 
 ## Introduction
 The [wiggle](http://wiki.aapg.org/Seismic_data_display) display is an ingenious methodology that displays two dimensional scalar fields on a horizontal plane. 
@@ -21,7 +24,7 @@ When horizontal mode is activated, each row is considered a trace of size N
 and there are M number of traces.
 
 
-## Dependancy
+## Dependency
 - [NumPy](http://www.numpy.org/)
 - [Matplotlib](http://matplotlib.org/)
 
