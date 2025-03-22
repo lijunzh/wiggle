@@ -93,4 +93,4 @@ ENV/
 .ropeproject
 
 # Ignore setuptools-scm generated version file
-src/wiggle/_version.py
+**/*/_version.py
