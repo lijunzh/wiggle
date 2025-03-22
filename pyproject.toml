@@ -8,7 +8,7 @@ dynamic = ["version"]
 description = "Wiggle Plot for Seismic Data Section"
 readme = "README.md"
 authors = [
-    { name = "gatechzhu", email = "gatechzhu@gmail.com" }
+    { name = "Lijun Zhu", email = "gatechzhu@gmail.com" }
 ]
 license = { file = "LICENSE" }
 requires-python = ">=3.10"
