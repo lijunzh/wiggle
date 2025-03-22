@@ -4,7 +4,6 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "wiggle"
-# version = "0.1.1"
 dynamic = ["version"]
 description = "Wiggle Plot for Seismic Data Section"
 readme = "README.md"
@@ -30,5 +29,6 @@ publish-url = "https://test.pypi.org/legacy/"
 explicit = true
 
 [tool.setuptools_scm]
-version_scheme = "relesae-branch-semver"
+version_scheme = "guess-next-dev"   # Use guess-next-dev so that if you tag the commit as v0.1.1, it will compute v0.1.1 (or v0.1.1.devN if commits follow)
 local_scheme = "no-local-version"
+write_to = "src/wiggle/_version.py"
