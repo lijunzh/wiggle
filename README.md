@@ -3,50 +3,85 @@
 [![PyPI version](https://img.shields.io/pypi/v/wiggle)](https://pypi.org/project/wiggle/)
 ![License](https://img.shields.io/pypi/l/wiggle)
 ![Python versions](https://img.shields.io/pypi/pyversions/wiggle)
-[![Build Status](https://github.com/gatechzhu/wiggle/actions/workflows/cicd.yml/badge.svg)](https://github.com/lijunzh/wiggle/actions/workflows/cicd.yml)
+[![CI/CD](https://github.com/lijunzh/wiggle/actions/workflows/cicd.yml/badge.svg)](https://github.com/lijunzh/wiggle/actions/workflows/cicd.yml)
 
 ## Introduction
-The [wiggle](http://wiki.aapg.org/Seismic_data_display) display is an ingenious methodology that displays two dimensional scalar fields on a horizontal plane. 
-Originally developed by the geophysical community, the wiggle plot was created to provide a visual analysis of seismic and seismological data, or any other vibration data, in order to help the identification of events that can be stressed out with the coherent alignment of lobes. 
-Ultimately those events can be related to geological features and/or can help the determination of the some physical properties of rocks, such as the velocity of P and S waves. 
-Before digital displays were standard in the industry the wiggle plot was composed either by oscillatory continuous lines and black filled lobes, both drawn by special plotters on long paper sheets. 
-Nowadays, when digital graphical displays are easily available, both elements, the lines and the lobes, are merged into a new one display called wiggle.
 
-Inspired by [wiggle in Matlab](https://www.mathworks.com/matlabcentral/fileexchange/38691-wiggle) function, I created this Python tools to mimic the experience of plotting seismic section data in [Matlab](https://www.mathworks.com/products/matlab.html) with similar user interface. 
-Basically one can control the color and direction of the lines, the color of the left and right lobes, among others. 
-In order to control these features, a controlling string must be provided as input, in a similar way the function PLOT allows control of the graphical elements. 
+The [wiggle](http://wiki.aapg.org/Seismic_data_display) display is a
+visualization methodology for two-dimensional scalar fields on a horizontal
+plane. Originally developed by the geophysical community, wiggle plots
+provide visual analysis of seismic, seismological, or any other vibration
+data — helping identify events through the coherent alignment of lobes that
+relate to geological features and physical rock properties.
 
-Given a d M x N ndarray data matrix D, wiggle decompose it into multiple 
-traces. 
-Under vertical mode (default), each columns is a seismic trace of size M and 
-there are N number of traces. 
-When horizontal mode is activated, each row is considered a trace of size N 
-and there are M number of traces.
+Inspired by the
+[MATLAB wiggle function](https://www.mathworks.com/matlabcentral/fileexchange/38691-wiggle),
+this Python package offers a similar interface for plotting seismic section
+data with control over colour, amplitude, and axis orientation.
 
-
-## Dependency
-- [NumPy](http://www.numpy.org/)
-- [Matplotlib](http://matplotlib.org/)
+Given an *M × N* `ndarray`, `wiggle` decomposes it into *N* traces of
+length *M* (column-major, vertical mode by default).
 
 ## Installation
+
 ### From PyPI
-```
+
+```bash
 pip install wiggle
 ```
 
-### From source file
-Download the source from the [releases page](https://github.com/gatechzhu/wiggle/releases). Under the root directory, run:
+### From source (development)
 
-```
+```bash
+git clone https://github.com/lijunzh/wiggle.git
+cd wiggle
 uv sync --all-extras --dev
 ```
 
-to install the project in development mode, or build a source distribution using:
+Build a distribution:
 
-```
+```bash
 uv build
+```
+
+## Quick Start
+
+```python
+import numpy as np
+from wiggle import wiggle
+
+data = np.random.default_rng(42).standard_normal((200, 20))
+ax = wiggle(data, sf=0.15)
+```
+
+## Dependencies
+
+- [NumPy](https://numpy.org/)
+- [Matplotlib](https://matplotlib.org/)
+
+## Development
+
+Linting and formatting are handled by [Ruff](https://docs.astral.sh/ruff/):
+
+```bash
+uv run ruff check src tests
+uv run ruff format src tests
+```
+
+Run tests:
+
+```bash
+uv run pytest
+```
+
+Pre-commit hooks are available:
+
+```bash
+uv run pre-commit install
 ```
 
 ## Contact
 
-In counter of any trouble, contact *gatechzhu@gmail.com*
+For issues, please open a
+[GitHub issue](https://github.com/lijunzh/wiggle/issues) or contact
+*gatechzhu@gmail.com*.

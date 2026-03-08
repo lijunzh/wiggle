@@ -1,53 +1,88 @@
-import numpy as np
+"""Tests for the wiggle plot module."""
+
 import matplotlib.pyplot as plt
+import numpy as np
 import pytest
 
 from wiggle import wiggle
 
-class TestWiggle:
-    def test_input_check_invalid_data(self):
-        # Invalid type for data should raise TypeError.
-        with pytest.raises(TypeError):
+
+@pytest.fixture(autouse=True)
+def _close_figures():
+    """Close all matplotlib figures after each test to prevent leaks."""
+    yield
+    plt.close("all")
+
+
+class TestInputValidation:
+    """Ensure invalid inputs are rejected with clear errors."""
+
+    def test_rejects_non_array_data(self):
+        with pytest.raises(TypeError, match="numpy array"):
             wiggle("not a numpy array")
 
-        # 1D array should raise ValueError.
-        with pytest.raises(ValueError):
+    def test_rejects_1d_data(self):
+        with pytest.raises(ValueError, match="2D"):
             wiggle(np.array([1, 2, 3]))
 
-    def test_input_check_invalid_tt(self):
-        # Create valid data and invalid tt (2D instead of 1D)
-        data = np.random.randn(10, 5)
+    def test_rejects_2d_tt(self):
+        data = np.random.default_rng(0).standard_normal((10, 5))
         tt = np.arange(10).reshape(10, 1)
-        with pytest.raises(ValueError):
+        with pytest.raises(ValueError, match="1D"):
             wiggle(data, tt=tt)
 
-    def test_input_check_invalid_xx(self):
-        # Create valid data and create invalid xx shape
-        data = np.random.randn(10, 5)
-        tt = np.arange(10)
+    def test_rejects_2d_xx(self):
+        data = np.random.default_rng(0).standard_normal((10, 5))
         xx = np.arange(5).reshape(5, 1)
-        with pytest.raises(ValueError):
-            wiggle(data, tt=tt, xx=xx)
+        with pytest.raises(ValueError, match="1D"):
+            wiggle(data, tt=np.arange(10, dtype=float), xx=xx)
 
-    def test_wiggle_returns_axes(self):
-        # Test that valid call returns an axes with expected plot elements.
-        data = np.array([[1, -1], [-1, 1]])
-        ax = wiggle(data, verbose=False)
-        # Check that plot lines exist.
+    def test_rejects_non_bool_verbose(self):
+        data = np.random.default_rng(0).standard_normal((10, 5))
+        with pytest.raises(TypeError, match="bool"):
+            wiggle(data, verbose="yes")  # type: ignore[arg-type]
+
+    def test_rejects_non_axes_ax(self):
+        data = np.random.default_rng(0).standard_normal((10, 5))
+        with pytest.raises(TypeError, match="Axes"):
+            wiggle(data, ax="not_an_axes")  # type: ignore[arg-type]
+
+    def test_rejects_non_numeric_sf(self):
+        data = np.random.default_rng(0).standard_normal((10, 5))
+        with pytest.raises(TypeError, match="number"):
+            wiggle(data, sf="big")  # type: ignore[arg-type]
+
+
+class TestWigglePlot:
+    """Verify correct plotting behaviour."""
+
+    def test_returns_axes(self):
+        data = np.array([[1.0, -1.0], [-1.0, 1.0]])
+        ax = wiggle(data)
+        assert isinstance(ax, plt.Axes)
+
+    def test_plot_has_lines_and_fills(self):
+        data = np.array([[1.0, -1.0], [-1.0, 1.0]])
+        ax = wiggle(data)
         assert len(ax.lines) > 0
-        # Check that filled collections exist.
         assert len(ax.collections) > 0
-        # Check axis limits are set (non-zero range)
+
+    def test_axis_limits_inverted(self):
+        data = np.array([[1.0, -1.0], [-1.0, 1.0]])
+        ax = wiggle(data)
         xlims = ax.get_xlim()
         ylims = ax.get_ylim()
         assert xlims[0] < xlims[1]
-        assert ylims[0] > ylims[1]
+        assert ylims[0] > ylims[1], "y-axis should be inverted"
 
-    def test_wiggle_with_custom_ax(self):
-        # Test using a provided matplotlib axis
-        fig, ax = plt.subplots()
-        data = np.random.randn(20, 3)
-        ret_ax = wiggle(data, ax=ax, verbose=False)
-        # Returned axis should be the same as provided one.
+    def test_uses_provided_axes(self):
+        _fig, ax = plt.subplots()
+        data = np.random.default_rng(42).standard_normal((20, 3))
+        ret_ax = wiggle(data, ax=ax)
         assert ret_ax is ax
-        plt.close(fig)
+
+    def test_verbose_output(self, capsys):
+        data = np.random.default_rng(0).standard_normal((10, 3))
+        wiggle(data, verbose=True)
+        captured = capsys.readouterr()
+        assert "automatically generated" in captured.out

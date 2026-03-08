@@ -12,14 +12,30 @@ authors = [
 ]
 license = { file = "LICENSE" }
 requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Typing :: Typed",
+]
 dependencies = [
     "numpy",
-    "matplotlib"
+    "matplotlib",
 ]
 
 [dependency-groups]
 dev = [
     "pytest>=8.3.5",
+    "ruff>=0.9",
+    "pre-commit>=4.0",
 ]
 
 [[tool.uv.index]]
@@ -29,6 +45,28 @@ publish-url = "https://test.pypi.org/legacy/"
 explicit = true
 
 [tool.setuptools_scm]
-version_scheme = "guess-next-dev"   # Use guess-next-dev so that if you tag the commit as v0.1.1, it will compute v0.1.1 (or v0.1.1.devN if commits follow)
+version_scheme = "guess-next-dev"
 local_scheme = "no-local-version"
 write_to = "src/wiggle/_version.py"
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "UP",   # pyupgrade
+    "B",    # flake8-bugbear
+    "SIM",  # flake8-simplify
+    "RUF",  # ruff-specific rules
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["wiggle"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
