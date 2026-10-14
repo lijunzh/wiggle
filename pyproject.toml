@@ -30,6 +30,12 @@ dependencies = [
     "matplotlib",
 ]
 
+[project.urls]
+Homepage = "https://github.com/lijunzh/wiggle"
+Repository = "https://github.com/lijunzh/wiggle"
+Issues = "https://github.com/lijunzh/wiggle/issues"
+Changelog = "https://github.com/lijunzh/wiggle/blob/master/CHANGELOG.md"
+
 [dependency-groups]
 dev = [
     "pytest>=9.0.3",
