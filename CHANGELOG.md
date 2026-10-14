@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-10-13
+
 ### Changed
 
 - **Dropped Python 3.10** (end of life October 2026). Wiggle now requires
@@ -43,5 +45,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Earlier releases (0.1.0, 0.1.1) are listed on the
 [tags page](https://github.com/lijunzh/wiggle/tags).
 
-[Unreleased]: https://github.com/lijunzh/wiggle/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/lijunzh/wiggle/compare/v0.1.3...HEAD
+[0.1.3]: https://github.com/lijunzh/wiggle/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/lijunzh/wiggle/releases/tag/v0.1.2
