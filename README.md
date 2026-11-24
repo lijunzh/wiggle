@@ -22,6 +22,19 @@ data with control over colour, amplitude, and axis orientation.
 Given an *M × N* `ndarray`, `wiggle` decomposes it into *N* traces of
 length *M* (column-major, vertical mode by default).
 
+## Project status: maintenance mode
+
+wiggle is feature-complete, and no new features are planned. It stays
+maintained so that it keeps installing and working. What to expect:
+
+- **Compatibility fixes** ship as patch releases when a new Python, NumPy or
+  Matplotlib version breaks something. CI tests Python 3.11–3.14.
+- **Dependencies:** wiggle sets no upper version limits, so NumPy and Matplotlib
+  fixes reach you through your own `pip` or `uv` upgrade, without a new
+  wiggle release. Dependabot keeps the CI and development tools current.
+- **Bug reports and pull requests** are welcome. Review may be slow, and
+  new features are unlikely to be merged.
+
 ## Installation
 
 ### From PyPI
